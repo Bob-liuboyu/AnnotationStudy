@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BindViewTools.bind(this);
-
         mTextView.setText("我是 TextView");
         mButton.setText("我是 Button");
         mImageView.setImageResource(R.color.colorPrimary);
