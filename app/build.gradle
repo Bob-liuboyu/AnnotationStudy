@@ -9,6 +9,9 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
+        // 显式声明支持注解
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     compileOptions {
@@ -21,7 +24,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.design
-    implementation project(':apt_annotation')
+//    implementation project(':apt_annotation')
     implementation project(':apt_library')
-    annotationProcessor project(':apt_processor')
+//    implementation project(':apt_processor')
+//    annotationProcessor project(':apt_processor')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
