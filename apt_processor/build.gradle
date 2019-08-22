@@ -2,8 +2,10 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation 'com.google.auto.service:auto-service:1.0-rc2'
-//    implementation 'com.squareup:javapoet:1.10.0'
+    implementation 'com.google.auto.service:auto-service:1.0-rc2'
+    annotationProcessor "com.google.auto.service:auto-service:1.0-rc2"
+    // 用于生成Java文件的库
+    api 'com.squareup:javapoet:1.10.0'
     api project(':apt_annotation')
 }
 
@@ -11,5 +13,5 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

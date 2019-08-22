@@ -1,5 +1,7 @@
 package androidtest.project.com.apt_processor;
 
+import com.google.auto.service.AutoService;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -25,8 +28,9 @@ import androidtest.project.com.apt_annotation.BindView;
 /**
  * @author liuboyu  E-mail:545777678@qq.com
  * @Date 2019-08-21
- * @Description 注解 Processor
+ * @Description 注解处理器
  */
+@AutoService(Processor.class)
 public class BindViewProcessor extends AbstractProcessor {
 
     private Messager mMessager;
@@ -49,7 +53,7 @@ public class BindViewProcessor extends AbstractProcessor {
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.latestSupported();
+        return SourceVersion.RELEASE_8;
     }
 
     @Override
@@ -85,29 +89,21 @@ public class BindViewProcessor extends AbstractProcessor {
             } catch (IOException e) {
                 mMessager.printMessage(Diagnostic.Kind.NOTE, " --> create " + proxyInfo.getProxyClassFullName() + "error");
             }
-        }
+        }//
+
+//        //通过javapoet生成
+//        for (String key : mProxyMap.keySet()) {
+//            ClassCreatorProxy proxyInfo = mProxyMap.get(key);
+//            JavaFile javaFile = JavaFile.builder(proxyInfo.getPackageName(), proxyInfo.generateJavaCode2()).build();
+//            try {
+//                //　生成文件
+//                javaFile.writeTo(processingEnv.getFiler());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         mMessager.printMessage(Diagnostic.Kind.NOTE, "process finish ...");
         return true;
-    }
-
-
-    /**
-     * 要绑定的View的信息载体
-     */
-    class ViewInfo {
-        /**
-         * //view的变量名
-         */
-        String viewName;
-        /**
-         * xml中的id
-         */
-        int id;
-
-        public ViewInfo(String viewName, int id) {
-            this.viewName = viewName;
-            this.id = id;
-        }
     }
 }

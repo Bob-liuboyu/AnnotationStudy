@@ -22,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BindViewTools.bind(this);
+        // 编译时解析注解 BindView
+//        BindViewTools.bind(this);
+
+        //运行时解析注解 BindView
+        BindViewTools.inject(this);
         mTextView.setText("我是 TextView");
         mButton.setText("我是 Button");
         mImageView.setImageResource(R.color.colorPrimary);

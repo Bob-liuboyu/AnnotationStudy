@@ -26,7 +26,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api rootProject.ext.dependencies.appcompatV7
     api project(':apt_processor')
-//    implementation project(':apt_annotation')
+//    annotationProcessor project(':apt_processor')
 }
 
 tasks.withType(JavaCompile) {
